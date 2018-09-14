@@ -71,3 +71,11 @@ echo "DEAL.II"
 
 echo "OpenCV"
 #git clone https://github.com/opencv/opencv.git
+
+
+echo "PELICAN"
+echo "plugins"
+#git clone https://github.com/getpelican/pelican-plugins.git
+
+echo "themes"
+#git clone https://github.com/getpelican/pelican-themes.git
