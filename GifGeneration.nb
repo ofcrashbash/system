@@ -1,0 +1,116 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3826,        108]
+NotebookOptionsPosition[      3183,         88]
+NotebookOutlinePosition[      3531,        103]
+CellTagsIndexPosition[      3488,        100]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Gif generation", "Title",
+ CellChangeTimes->{{3.740838814564451*^9, 
+  3.740838823157003*^9}},ExpressionUUID->"687db415-9f77-470c-91fe-\
+6b1979be11c0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"filesPaths", " ", "=", " ", 
+   RowBox[{"SystemDialogInput", "[", "\"\<FileOpen\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filesFolderPath", " ", "=", " ", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"Most", "@", 
+     RowBox[{"FileNameSplit", "[", 
+      RowBox[{"filesPaths", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gifName", " ", "=", " ", 
+   RowBox[{
+   "filesFolderPath", "<>", "\"\<\\\\\>\"", "<>", "\"\<animation.gif\>\""}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"imagesTable", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Import", "[", "#", "]"}], "&"}], "/@", "filesPaths"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{"gifName", ",", " ", "imagesTable"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Run", "[", 
+   RowBox[{"\"\<photoshop \>\"", " ", "<>", "gifName"}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.74083477135038*^9, 3.740834776646021*^9}, {
+  3.7408348813929963`*^9, 3.7408348908907814`*^9}, {3.7408349580326767`*^9, 
+  3.7408349596885405`*^9}, {3.740837321574375*^9, 3.740837354107133*^9}, {
+  3.7408374657910566`*^9, 3.7408375694205637`*^9}, {3.740837627044868*^9, 
+  3.7408376724875016`*^9}, {3.7408386575404496`*^9, 3.7408387146732745`*^9}, {
+  3.740838753901554*^9, 3.7408387729164963`*^9}, {3.74084027764428*^9, 
+  3.7408402942028856`*^9}, {3.740842610727868*^9, 
+  3.740842611055915*^9}},ExpressionUUID->"d3e51219-ba64-45c8-895b-\
+694d922b3b0c"],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\ofcra\\\\Programs\\\\chronolapse\\\\\
+screenshots\\\\animation.gif\"\>"], "Output",
+ CellChangeTimes->{
+  3.740837680688712*^9, 3.7408387238966336`*^9, 3.740838780703652*^9, {
+   3.7408402833147993`*^9, 3.7408403095593424`*^9}, 3.7408411585412397`*^9, 
+   3.740841655805943*^9, 3.740842754594531*^9, 3.7408435207946625`*^9, 
+   3.7408441021344786`*^9, 3.740844553852646*^9, 3.7408450189239807`*^9, 
+   3.740845788673135*^9, 3.7408465903595304`*^9, 
+   3.7408478865181437`*^9},ExpressionUUID->"6bdb6826-ddbe-4b1c-a20b-\
+6c5c8a33e6b1"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7408403148393393`*^9, 3.740840321539836*^9}, {
+   3.740840755103504*^9, 3.7408407605875006`*^9}, 
+   3.740842608962659*^9},ExpressionUUID->"9488dd8c-512f-461a-8853-\
+dca8113fed33"]
+}, Open  ]]
+},
+WindowSize->{1500, 927},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 157, 3, 96, "Title",ExpressionUUID->"687db415-9f77-470c-91fe-6b1979be11c0"],
+Cell[CellGroupData[{
+Cell[762, 29, 1592, 38, 124, "Input",ExpressionUUID->"d3e51219-ba64-45c8-895b-694d922b3b0c"],
+Cell[2357, 69, 566, 9, 32, "Output",ExpressionUUID->"6bdb6826-ddbe-4b1c-a20b-6c5c8a33e6b1"]
+}, Open  ]],
+Cell[2938, 81, 229, 4, 28, "Input",ExpressionUUID->"9488dd8c-512f-461a-8853-dca8113fed33"]
+}, Open  ]]
+}
+]
+*)
+
