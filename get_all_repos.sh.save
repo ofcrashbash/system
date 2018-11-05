@@ -1,0 +1,14 @@
+echo "BOOST"
+git clone --recursive-submodules https://github.com/boostorg/boost.git boost
+
+echo "glfw"
+git clone https://github.com/glfw/glfw.git glfw
+
+echo "glad"
+git clone https://github.com/Dav1dde/glad.git glad
+
+echo "assimp"
+git clone  https://github.com/assimp/assimp.git assimphttps://github.com/Reference-LAPACK/lapack.git
+
+echo "LAPACK"
+git clone 

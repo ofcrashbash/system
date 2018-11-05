@@ -1,0 +1,2 @@
+echo 'change loaction to Windows home directory'
+cd '/mnt/c/users/ofcra'
