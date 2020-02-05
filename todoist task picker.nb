@@ -1,0 +1,246 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11195,        238]
+NotebookOptionsPosition[     10770,        222]
+NotebookOutlinePosition[     11111,        237]
+CellTagsIndexPosition[     11068,        234]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"CloudDeploy", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Module", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"TaskList", "=", 
+          RowBox[{"Association", "/@", 
+           RowBox[{"Import", "[", "\[IndentingNewLine]", 
+            RowBox[{"URLRead", "[", "\[IndentingNewLine]", 
+             RowBox[{"HTTPRequest", "[", "\[IndentingNewLine]", 
+              RowBox[{"<|", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"\"\<Scheme\>\"", "\[Rule]", "\"\<https\>\""}], ",", 
+                " ", "\[IndentingNewLine]", 
+                RowBox[{
+                "\"\<Domain\>\"", "\[Rule]", "\"\<api.todoist.com\>\""}], ",",
+                 "\[IndentingNewLine]", 
+                RowBox[{"\"\<Path\>\"", "\[Rule]", "\"\<rest/v1/tasks\>\""}], 
+                ",", "\[IndentingNewLine]", 
+                RowBox[{"\"\<Headers\>\"", "\[Rule]", 
+                 RowBox[{"{", "\[IndentingNewLine]", 
+                  RowBox[{
+                  "\"\<Authorization\>\"", "\[Rule]", 
+                   "\"\<Bearer \
+c3faccf686261ebf44cd1fe0954185ace3d018ae\>\""}], "\[IndentingNewLine]", 
+                  "}"}]}]}], "\[IndentingNewLine]", "|>"}], 
+              "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], 
+            "\[IndentingNewLine]", "]"}]}]}], ",", "\[IndentingNewLine]", 
+         "uncompletedTasks", ",", "\[IndentingNewLine]", "priorities", ",", 
+         "\[IndentingNewLine]", "daysToCompleteTask", ",", 
+         "\[IndentingNewLine]", "PrioritySelector", ",", 
+         "\[IndentingNewLine]", "daysPriority", ",", "\[IndentingNewLine]", 
+         "order"}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"uncompletedTasks", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"TaskList", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", "\"\<completed\>\"", "]"}], "\[Equal]", 
+             "False"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"urls", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", "\"\<url\>\"", "]"}], "&"}], "/@", 
+          "uncompletedTasks"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"priorities", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", "\"\<priority\>\"", "]"}], "&"}], "/@", 
+          "uncompletedTasks"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"daysToCompleteTask", "=", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"If", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Head", "[", "#", "]"}], "===", "Missing"}], ",", 
+             "\[IndentingNewLine]", "0", ",", " ", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"AbsoluteTime", "[", 
+                  RowBox[{
+                   RowBox[{"Association", "[", "#", "]"}], "[", 
+                   "\"\<date\>\"", "]"}], "]"}], "-", 
+                 RowBox[{"AbsoluteTime", "[", "]"}]}], ")"}], "/", "3600"}], 
+              "/", "24"}]}], "\[IndentingNewLine]", "]"}], "&"}], "/@", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", "\"\<due\>\"", "]"}], "&"}], "/@", 
+            "uncompletedTasks"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"PrioritySelector", "[", "days_", "]"}], ":=", 
+         RowBox[{"Which", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"days", "==", "0"}], ",", " ", "0", ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"days", ">", "0"}], "&&", " ", 
+            RowBox[{"days", "<=", "2"}]}], ",", " ", "30", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"days", ">", "2"}], "&&", " ", 
+            RowBox[{"days", "\[LessEqual]", "7"}]}], ",", " ", "15", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"days", ">", "7"}], "&&", 
+            RowBox[{"days", "\[LessEqual]", "31"}]}], ",", "10", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"days", "<", "0"}], ",", " ", "6", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"days", ">", "0"}], ",", " ", "2"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"daysPriority", "=", 
+         RowBox[{"PrioritySelector", "/@", "daysToCompleteTask"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"pr", " ", "=", " ", 
+         RowBox[{"priorities", "+", "daysPriority"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"targetTaskUrl", "=", 
+         RowBox[{"RandomChoice", "[", 
+          RowBox[{"pr", "->", "urls"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"order", "=", 
+         RowBox[{"Ordering", "[", "pr", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Column", "[", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Button", "[", "\[IndentingNewLine]", 
+            RowBox[{"\"\<Open Random Task\>\"", ",", "\[IndentingNewLine]", 
+             RowBox[{"SystemOpen", "[", 
+              RowBox[{"RandomChoice", "[", 
+               RowBox[{"pr", "->", "urls"}], "]"}], "]"}]}], 
+            "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+           "targetTaskUrl", ",", "\[IndentingNewLine]", 
+           RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+            RowBox[{"Reverse", "@", 
+             RowBox[{"Transpose", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"pr", "[", 
+                 RowBox[{"[", "order", "]"}], "]"}], ",", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"#", "[", "\"\<content\>\"", "]"}], "&"}], "/@", 
+                 RowBox[{"uncompletedTasks", "[", 
+                  RowBox[{"[", "order", "]"}], "]"}]}]}], "}"}], "]"}]}], 
+            "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+     "\"\<\:0417 \:0432\:0430\:0433\:043e\:044e \
+\:0432\:0438\:043f\:0430\:0434\:043a\:043e\:0432\:0438\:043c \:0447\:0438\
+\:043d\:043e\:043c \:0432\:0438\:0431\:0438\:0440\:0430\:0454 \:0437\:0430\
+\:0432\:0434\:0430\:043d\:043d\:044f\>\""}], "\[IndentingNewLine]", "]"}], 
+   ",", "\[IndentingNewLine]", "\"\<TodoistSelector\>\"", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"CloudObjectNameFormat", "\[Rule]", "\"\<UserURLBase\>\""}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.787698649775671*^9, 3.7876987044395256`*^9}, {
+   3.787698785120469*^9, 3.787698795166202*^9}, {3.78769883119154*^9, 
+   3.7876988358300323`*^9}, {3.7876989066309295`*^9, 3.787698959469578*^9}, {
+   3.7876990118731127`*^9, 3.7876990250548162`*^9}, {3.7876990937023115`*^9, 
+   3.7876991427885466`*^9}, {3.787699177445161*^9, 3.787699191541594*^9}, {
+   3.7876992250137477`*^9, 3.787699362755227*^9}, {3.787699450036557*^9, 
+   3.787699460107298*^9}, {3.7876994972432313`*^9, 3.7876995006830997`*^9}, {
+   3.787699705539443*^9, 3.78769977320949*^9}, {3.7876999401777487`*^9, 
+   3.7876999461608176`*^9}, {3.7876999885607333`*^9, 
+   3.7876999940009794`*^9}, {3.7877000768898554`*^9, 3.787700094434046*^9}, {
+   3.7877011150197897`*^9, 3.787701256291442*^9}, {3.787701582579173*^9, 
+   3.787701617369508*^9}, {3.7877017084583797`*^9, 3.787701708544367*^9}, {
+   3.7877027410626097`*^9, 3.787702745019174*^9}, {3.78770278461438*^9, 
+   3.7877028018111353`*^9}, {3.787703664818432*^9, 3.787703676062792*^9}, {
+   3.7877037266661177`*^9, 3.787703732734877*^9}, {3.787703769599885*^9, 
+   3.787703780967205*^9}, {3.787703825456693*^9, 3.787703835462455*^9}, {
+   3.787703885903598*^9, 3.7877038859745617`*^9}, {3.7877039492637386`*^9, 
+   3.7877040736850615`*^9}, {3.787704118599066*^9, 3.787704123333514*^9}, {
+   3.7877041548708687`*^9, 3.7877041677808046`*^9}, {3.787704209040593*^9, 
+   3.787704237214758*^9}, {3.787704272965662*^9, 3.78770428731607*^9}, {
+   3.78770439797381*^9, 3.7877044551152973`*^9}, {3.7877045021260104`*^9, 
+   3.78770450698843*^9}, {3.7877045817399216`*^9, 3.7877045818668933`*^9}, {
+   3.7877046677382565`*^9, 3.787704669722625*^9}, {3.7877047566025295`*^9, 
+   3.787704782250207*^9}, 3.7877050407785645`*^9, {3.789505440108673*^9, 
+   3.789505448817854*^9}, {3.7895055302746267`*^9, 
+   3.7895055456496625`*^9}},ExpressionUUID->"9c4aa609-0b1b-4a9a-9fb2-\
+8bb6bd629517"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"CloudObject", "[", 
+   TemplateBox[{
+    "\"https://www.wolframcloud.com/obj/ofcrashbash/TodoistSelector\"",
+     "https://www.wolframcloud.com/obj/ofcrashbash/TodoistSelector"},
+    "HyperlinkURL"], "]"}],
+  CloudObject["https://www.wolframcloud.com/obj/ofcrashbash/TodoistSelector"],
+  SelectWithContents->True]], "Output",
+ CellChangeTimes->{
+  3.7876990269352074`*^9, 3.787699198790234*^9, 3.7876993677754574`*^9, 
+   3.7876995032962513`*^9, 3.7876997080566387`*^9, {3.787699738125062*^9, 
+   3.78769977530081*^9}, {3.7876999961462693`*^9, 3.7877000134694567`*^9}, {
+   3.78770008007782*^9, 3.787700096963225*^9}, 3.787701622173648*^9, 
+   3.787701712368123*^9, 3.787702750223483*^9, {3.7877027919649935`*^9, 
+   3.787702804448268*^9}, {3.7877036736335807`*^9, 3.7877036784989996`*^9}, {
+   3.787703729892789*^9, 3.787703735799881*^9}, 3.7877037839972095`*^9, 
+   3.7877038386070967`*^9, 3.7877038891975155`*^9, 3.787704006809568*^9, {
+   3.7877040509286084`*^9, 3.7877040769190235`*^9}, 3.787704126212592*^9, 
+   3.787704172267334*^9, {3.78770423438669*^9, 3.7877042466736975`*^9}, {
+   3.7877042833113003`*^9, 3.787704291301762*^9}, {3.787704447685467*^9, 
+   3.7877044574385295`*^9}, 3.787704510143186*^9, 3.7877047874075284`*^9, 
+   3.787705044751274*^9},
+ CellLabel->
+  "Out[235]=",ExpressionUUID->"63af75f9-ec00-4857-8dba-540bf53920ca"]
+}, Open  ]]
+},
+WindowSize->{958, 998},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 8780, 171, 1226, "Input",ExpressionUUID->"9c4aa609-0b1b-4a9a-9fb2-8bb6bd629517"],
+Cell[9363, 195, 1391, 24, 35, "Output",ExpressionUUID->"63af75f9-ec00-4857-8dba-540bf53920ca"]
+}, Open  ]]
+}
+]
+*)
+
